@@ -1,13 +1,6 @@
 trigger:
- - master
-stages:
- - stage: Build
-   displayName: Create build artifact
-   jobs:
-     - job: BuildArtifact
-       pool: MYLAPTOP
-       steps:
-         - script: C:\Users\narender\AppData\Local\UiPath\UiPath.Agent.exe pack $(Build.SourcesDirectory)\project.json -o $(Build.ArtifactStagingDirectory)\ -v 1.0.$(Build.BuildNumber)
-           displayName: "Build the artifact"
-         - publish: $(Build.ArtifactStagingDirectory)
-           artifact: drop
+- task: UiPathDeploy@2
+  inputs:
+    orchestratorConnection: 'UI PATH orch'
+    packagesPath: 'C:\Users\narender\Documents\UiPath\BackgroundProcess1.1.0.1.nupkg'
+    folderName: 'Default'
